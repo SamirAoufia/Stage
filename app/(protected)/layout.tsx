@@ -1,0 +1,19 @@
+import { Navbar } from "@/app/(protected)/_components/navbar";
+
+interface ProtectedLayoutProps {
+  children: React.ReactNode;
+};
+
+const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
+  return ( 
+    <main className=" flex flex-col">
+    <Navbar />
+    <div className="flex-col  flex items-center mt-5 ">
+      {children}
+    </div>
+  </main>
+    
+    );
+}
+
+export default ProtectedLayout;
