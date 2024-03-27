@@ -230,7 +230,32 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
     }
   }, [isOpen]);
 
+  // oui : {range.from.toString()}
+  // non : {range.to?.toString()}
+
+ 
+  // useEffect(() => {
+  //   PostDataToAPI();
+  //    // Appeler l'API une fois au chargement initial
+  //   const intervalId = setInterval(PostDataToAPI, 2000); // Mettre à jour toutes les 2 secondes
+  //   return () => clearInterval(intervalId); // Nettoyer l'intervalle lors du démontage
+  // }, []); // Rafraîchir les données lorsque la valeur sélectionnée change
+
+  // // Fonction pour récupérer les données de l'API
+  // async function PostDataToAPI() {
+  //   try {
+  //     const response = await fetch(`../api/plateaudate`,{
+  //       method: 'POST',
+  //       body: JSON.stringify({from: range.from.toString(),to: range.to?.toString()}),
+      
+  //     });
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // }
+
   return (
+    <main>
     <Popover modal={true} open={isOpen} onOpenChange={(open: boolean) => {
       if (!open) {
         resetValues()
@@ -348,6 +373,9 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
           </Button>
           <Button
             onClick={() => {
+
+              // PostDataToAPI(),
+
               setIsOpen(false)
               if (
                 !areRangesEqual(range, openedRangeRef.current) 
@@ -355,14 +383,21 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
                 onUpdate?.({ range });
               }
             }}
+
+            
           >
             Update
           </Button>
         </div>
       </PopoverContent>
     </Popover>
- 
+            
+  oui : {range.from.toString() }
+   non : {range.to?.toString()}
 
+    </main>
+ 
+    
 
   )
 }

@@ -17,25 +17,25 @@ const BluetoothForm = () => {
     return () => clearInterval(intervalId); // Nettoyer l'intervalle lors du démontage
   }, []); // Rafraîchir les données lorsque la valeur sélectionnée change
 
-  useEffect(() => {
-    PostDataToAPI();
-     // Appeler l'API une fois au chargement initial
-    const intervalId = setInterval(PostDataToAPI, 2000); // Mettre à jour toutes les 2 secondes
-    return () => clearInterval(intervalId); // Nettoyer l'intervalle lors du démontage
-  }, []); // Rafraîchir les données lorsque la valeur sélectionnée change
+  // useEffect(() => {
+  //   PostDataToAPI();
+  //    // Appeler l'API une fois au chargement initial
+  //   const intervalId = setInterval(PostDataToAPI, 2000); // Mettre à jour toutes les 2 secondes
+  //   return () => clearInterval(intervalId); // Nettoyer l'intervalle lors du démontage
+  // }, []); // Rafraîchir les données lorsque la valeur sélectionnée change
 
-  // Fonction pour récupérer les données de l'API
-  async function PostDataToAPI() {
-    try {
-      const response = await fetch(`../api/plateaudate`,{
-        method: 'POST',
-        body: JSON.stringify({f1,f2}),
+  // // Fonction pour récupérer les données de l'API
+  // async function PostDataToAPI() {
+  //   try {
+  //     const response = await fetch(`../api/plateaudate`,{
+  //       method: 'POST',
+  //       body: JSON.stringify({f1,f2}),
       
-      });
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
+  //     });
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // }
 
   async function fetchDataFromAPI() {
     try{
