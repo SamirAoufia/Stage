@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/select";
 import {json2csv} from 'json-2-csv';
 import { Button } from "@/components/ui/button";
+import { DateRangePicker } from '@/components/calendrier/data-picker-plateau1';
+import { DateRangePicker2 } from '@/components/calendrier/data-picker-plateau2';
 
 const PlateauForm = () => {
   const [data, setData] = useState([]);
@@ -54,7 +56,7 @@ const PlateauForm = () => {
 
 
 
-        <div className=' flex justify-center mt-6 gap-x-5'>
+        <div className=' flex justify-center mt-6 '>
           <Select onValueChange={(value) => setSelectedPlateau(value)} >
             <SelectTrigger className="w-[280px]">
               <SelectValue>{selectedPlateau}</SelectValue>
@@ -64,10 +66,49 @@ const PlateauForm = () => {
               <SelectItem  value={'plateau2'}>Plateau 2</SelectItem>
             </SelectContent>
           </Select>
+          </div>
 
-          <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
+          <div className='flex justify-center mt-6 '>
+            
+            {selectedPlateau === 'plateau1' && (
+              <>
+              <DateRangePicker locale='fr' /><Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
+            Télécharger CSV
+          </Button></>
+
+            )}
+            {selectedPlateau === 'plateau2' && (
+              <>
+              <DateRangePicker2 locale='fr' /><Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
+            Télécharger CSV
+          </Button></>
+            )}
+          </div>
+
+          
+          <div className='mt-8'>
+          <LineChart width={1600} height={600} data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="_time" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="Ptot" stroke="#049abb" />
+          </LineChart>
+        </div>
+
+      </main>
+          
+
+  );
+}
+
+export default PlateauForm;
+{/* <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
         Télécharger CSV
       </Button>
+
+      <DateRangePicker locale='fr' />
         </div>
 
         <div className='mt-8'>
@@ -80,9 +121,4 @@ const PlateauForm = () => {
             <Line type="monotone" dataKey="Ptot" stroke="#049abb" />
           </LineChart>
         </div>
-      </main>
-
-  );
-}
-
-export default PlateauForm;
+      </main> */}

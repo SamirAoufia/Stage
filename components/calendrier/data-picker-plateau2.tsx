@@ -15,7 +15,7 @@ import {
 import { ChevronUpIcon, ChevronDownIcon, CheckIcon } from '@radix-ui/react-icons'
 import { cn } from '@/lib/utils'
 
-export interface DateRangePickerProps {
+export interface DateRangePicker2Props {
   /** Click handler for applying the updates from DateRangePicker. */
   onUpdate?: (values: { range: DateRange }) => void
   /** Initial value for start date */
@@ -59,7 +59,7 @@ const PRESETS: Preset[] = [
 ]
 
 /** The DateRangePicker component allows a user to select a range of dates */
-export const DateRangePicker: FC<DateRangePickerProps> & {
+export const DateRangePicker2: FC<DateRangePicker2Props> & {
   filePath: string
 } = ({
   initialDateFrom = new Date((new Date()).setHours(0, 0, 0, 0)),
@@ -245,7 +245,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
   // Fonction pour récupérer les données de l'API
   async function PostDataToAPI() {
     try {
-      const response = await fetch(`../api/plateau1`,{
+      const response = await fetch(`../api/plateau2`,{
         method: 'POST',
         body: JSON.stringify({from: range.from.toLocaleDateString().split('/').reverse().join('-'),to: range.to?.toLocaleDateString().split('/').reverse().join('-')}),
       
@@ -392,21 +392,12 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
         </div>
       </PopoverContent>
     </Popover>
-            
-
-
-
- 
-    
-
   )
 }
 
-DateRangePicker.displayName = 'DateRangePicker'
-DateRangePicker.filePath =
+DateRangePicker2.displayName = 'DateRangePicker'
+DateRangePicker2.filePath =
   'libs/shared/ui-kit/src/lib/date-range-picker/date-range-picker.tsx'
 
-
-
-  // // {/* oui : {range.from.toLocaleDateString().split('/').reverse().join('-')}
-  // //  non : {range.to?.toLocaleDateString().split('/').reverse().join('-')} */}
+  // oui : {range.from.toLocaleDateString().split('/').reverse().join('-')}
+  //  non : {range.to?.toLocaleDateString().split('/').reverse().join('-')}
