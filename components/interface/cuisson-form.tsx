@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Button } from '@/components/ui/button';
+import { DateRangePicker } from '@/components/calendrier/data-picker-cuisson';
 
 const CuissonForm = () => {
   const [data, setData] = useState([]);
@@ -81,6 +82,7 @@ const CuissonForm = () => {
     <main>
       
       <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE</h1>
+      <div className='flex items-center justify-center'> <DateRangePicker locale='fr'/></div>
       <div className='flex justify-center gap-x-5'>
           <Button
             onClick={handleClickHumidity}

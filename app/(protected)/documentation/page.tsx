@@ -1,5 +1,5 @@
 "use client"
-import {DateRangePicker} from "@/components/calendrier/data-picker-plateau1";
+import {DateRangePicker} from "@/components/calendrier/data-picker-bluetooth";
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 

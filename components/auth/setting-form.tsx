@@ -29,7 +29,7 @@ const SettingsForm = () => {
       <p className=" border border-gray-300 rounded-lg p-3 text-lg mb-4 ">Role : {session?.role}</p>
       <p className="border border-gray-300 rounded-lg p-3 text-lg  ">Username : {session?.username}</p>
       </CardContent>
-      <BackButton label="Reset mot de passe" href="/resetmdp"/>
+      <BackButton label="Changement de mot de passe" href="/resetmdp"/>
     </Card>
   );
 }

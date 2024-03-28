@@ -3,12 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import {json2csv} from 'json-2-csv';
 import { Button } from "@/components/ui/button";
+import { DateRangePicker } from '@/components/calendrier/data-picker-bluetooth';
 
 const BluetoothForm = () => {
   const [data, setData] = useState([]);
-
-  const f1 = '2024-03-26';
-  const f2 = '2024-03-27';
 
   useEffect(() => {
     fetchDataFromAPI();
@@ -17,11 +15,9 @@ const BluetoothForm = () => {
     return () => clearInterval(intervalId); // Nettoyer l'intervalle lors du démontage
   }, []); // Rafraîchir les données lorsque la valeur sélectionnée change
 
-
-
   async function fetchDataFromAPI() {
     try{
-      const response = await fetch(`../api/plateaudate`);
+      const response = await fetch(`../api/bluetooth`);
       const data = await response.json();
       setData(data);
     }
@@ -55,19 +51,23 @@ const BluetoothForm = () => {
 
         <div className=' flex justify-center mt-6 gap-x-5'>
 
+        <DateRangePicker
+      locale="fr"
+      />
+
           <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
         Télécharger CSV
       </Button>
         </div>
 
-        <div className='mt-8'>
+        <div className=' flex mt-8'>
           <LineChart width={1600} height={600} data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="_time" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="Ptot" stroke="#049abb" />
+            <Line type="monotone" dataKey="bluetooth" stroke="#049abb" />
           </LineChart>
         </div>
       </main>
