@@ -63,10 +63,10 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
   filePath: string
 } = ({
   initialDateFrom = new Date((new Date()).setHours(0, 0, 0, 0)),
-  initialDateTo,
+  initialDateTo = new Date().setDate(new Date().getDate() + 1 ),
   onUpdate,
   align = 'end',
-  locale = 'be-EU',
+  locale = 'fr',
 }): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -184,7 +184,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
   const resetValues = (): void => {
     setRange({
       from: typeof initialDateFrom === 'string' ? new Date(initialDateFrom) : initialDateFrom,
-      to: initialDateTo ? (typeof initialDateTo === 'string' ? new Date(initialDateTo) : initialDateTo) : (typeof initialDateFrom === 'string' ? new Date(initialDateFrom) : initialDateFrom)
+      to: initialDateTo ? (typeof initialDateTo === 'string' ? new Date(initialDateTo) : new Date(initialDateTo)) : (typeof initialDateFrom === 'string' ? new Date(initialDateFrom) : initialDateFrom)
     })
     
   }
