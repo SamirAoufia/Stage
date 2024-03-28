@@ -1,5 +1,5 @@
 "use client"
-import {DateRangePicker} from "@/components/calendrier/data-picker";
+import {DateRangePicker} from "@/components/calendrier/data-picker-plateau1";
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
@@ -15,7 +15,7 @@ const DocumentationPage = () => {
 
   async function fetchDataFromAPI() {
     try{
-      const response = await fetch(`../api/plateaudate`);
+      const response = await fetch(`../api/plateau1date`);
       const data = await response.json();
       setData(data);
     }

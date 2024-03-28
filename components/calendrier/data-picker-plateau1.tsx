@@ -108,12 +108,13 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
     switch (preset.name) {
       case 'today':
         from.setHours(0, 0, 0, 0)
+        to.setDate(to.getDate() + 1 )
         to.setHours(23, 59, 59, 999)
         break
       case 'yesterday':
         from.setDate(from.getDate() - 1)
         from.setHours(0, 0, 0, 0)
-        to.setDate(to.getDate() - 1)
+        to.setDate(to.getDate() )
         to.setHours(23, 59, 59, 999)
         break
       case 'last14':
@@ -241,18 +242,18 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
   //   return () => clearInterval(intervalId); // Nettoyer l'intervalle lors du démontage
   // }, []); // Rafraîchir les données lorsque la valeur sélectionnée change
 
-  // // Fonction pour récupérer les données de l'API
-  // async function PostDataToAPI() {
-  //   try {
-  //     const response = await fetch(`../api/plateaudate`,{
-  //       method: 'POST',
-  //       body: JSON.stringify({from: range.from.toString(),to: range.to?.toString()}),
+  // Fonction pour récupérer les données de l'API
+  async function PostDataToAPI() {
+    try {
+      const response = await fetch(`../api/plateau1date`,{
+        method: 'POST',
+        body: JSON.stringify({from: range.from.toLocaleDateString().split('/').reverse().join('-'),to: range.to?.toLocaleDateString().split('/').reverse().join('-')}),
       
-  //     });
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // }
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
 
   return (
     <main>
@@ -374,7 +375,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
           <Button
             onClick={() => {
 
-              // PostDataToAPI(),
+              PostDataToAPI(),
 
               setIsOpen(false)
               if (
@@ -392,8 +393,8 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
       </PopoverContent>
     </Popover>
             
-  oui : {range.from.toString() }
-   non : {range.to?.toString()}
+  oui : {range.from.toLocaleDateString().split('/').reverse().join('-')}
+   non : {range.to?.toLocaleDateString().split('/').reverse().join('-')}
 
     </main>
  

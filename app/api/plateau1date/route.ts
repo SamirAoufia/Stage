@@ -1,8 +1,8 @@
 // 1. Installer les dépendances nécessaires (ex: influxdb node client)
 // 2. Configurer la connexion à la base de données InfluxDB
 import { InfluxDB } from '@influxdata/influxdb-client';
-import {  NextRequest,NextResponse } from 'next/server';
-import { FaDiceD20 } from 'react-icons/fa';
+import {NextResponse } from 'next/server';
+
 
 const influxdb = new InfluxDB({
   url: 'http://192.168.0.153:8086',
@@ -19,7 +19,7 @@ export async function GET() {
 
 
   //const fluxQuery = 'from(bucket: "PLATEAU1") |> range(start: -5m)   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: ["_start", "table","_stop", "_measurement", "device", "SSID","result" ])  |> truncateTimeColumn(unit: 10s) |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")';
-  const date = `from(bucket: "PLATEAU1") |> range(start: ${f1} , stop: ${f2})   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: ["_start", "table","_stop", "_measurement", "device", "SSID","result" ])  |> truncateTimeColumn(unit: 10s) |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")`;
+  const date = `from(bucket: "PLATEAU1") |> range(start: ${f1} , stop: ${f2})   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: ["_start", "table","_stop", "_measurement", "device", "SSID","result" ])   |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")`;
   const data = await queryInfluxDB(date);
 
   // 5. Gérer les requêtes et les réponses
