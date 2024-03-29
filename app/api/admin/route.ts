@@ -1,18 +1,15 @@
-import { currentRole } from "@/lib/auth";
-import {Role} from "@prisma/client";
 import { NextResponse } from "next/server";
-
+import  { getAllUsers } from "@/data/user";
+import {currentRole } from "@/lib/auth";
 
 export async function GET(){
 
+  const users = await getAllUsers()
   const role = await currentRole()
 
-  if(role === Role.Admin){
-    return new NextResponse(null, {
-      status: 200})
+  if(role === 'Admin'){
+    return NextResponse.json(users)}
+  else{
+    return NextResponse.json({error: 'Unauthorized'})
   }
-
-  return new NextResponse(null, {
-    status: 403})
-
-}
+  }

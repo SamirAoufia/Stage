@@ -1,9 +1,8 @@
 import {
   Avatar,
-  AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
-import { ExitIcon, AvatarIcon,PlusIcon} from "@radix-ui/react-icons"
+import { ExitIcon, AvatarIcon,PlusIcon, TableIcon} from "@radix-ui/react-icons"
 
 import {
   DropdownMenu,
@@ -41,6 +40,17 @@ export const  UserButton = () => {
             <><Link href="/admin/register"><DropdownMenuItem>
               <PlusIcon className="h-4 w-4 mr-2 text-[#AB9D62]" />
               Ajout
+
+            </DropdownMenuItem>
+            </Link><DropdownMenuSeparator /></>
+            
+          ) : null
+        }
+        {
+          session?.user?.role === "Admin" ? (
+            <><Link href="/admin/users"><DropdownMenuItem>
+              <TableIcon className="h-4 w-4 mr-2 text-[#AB9D62]" />
+              Utilisateurs
 
             </DropdownMenuItem>
             </Link><DropdownMenuSeparator /></>

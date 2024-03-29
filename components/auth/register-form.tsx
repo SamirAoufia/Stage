@@ -61,7 +61,7 @@ export const RegisterForm =()=>{
   return (
     <CardWrapper
       headerLabel="Welcome "
-      backButtonLabel="Tout les utilisateurs"
+      backButtonLabel="Retour à la liste des utilisateurs"
       backButtonHref="/admin/users"
       showSocial = {false}
       >

@@ -8,7 +8,6 @@ import { Role } from "@prisma/client"
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -27,28 +26,28 @@ const AllUsers = () => {
 
 
   const handleUserApi = async () => {
-    const response = await fetch('../api',)
+    const response = await fetch('../api/admin',)
     const data = await response.json()
     setUsers(data)
 
   }
 
   return (
+    <main>
     <div> 
-      <h1>Users : {}</h1>
       <ul>
         {users?.map(user => (
+          <div  key={user.id} className="border border-gray-300 rounded-md p-4 mb-4">
 
-          <Table key={user.id}>
-            <TableCaption>Users</TableCaption>
-            <TableHead>
+          <Table>
+            <TableHeader>
               <TableRow>
-              <TableHeader>ID</TableHeader>
-                <TableHeader>Username</TableHeader>
-                <TableHeader>Name</TableHeader>
-                <TableHeader>Role</TableHeader>
+              <TableHead>ID</TableHead>
+                <TableHead>Username</TableHead>
+                <TableHead>Nom</TableHead>
+                <TableHead>Role</TableHead>
               </TableRow>
-            </TableHead>
+            </TableHeader>
             <TableBody>
               <TableRow>
               <TableCell>{user.id}</TableCell>
@@ -58,9 +57,11 @@ const AllUsers = () => {
               </TableRow>
             </TableBody>
           </Table>
+          </div>
         ))}
       </ul>
     </div>
+    </main>
   )
 }
 
