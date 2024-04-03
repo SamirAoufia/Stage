@@ -6,7 +6,7 @@ const DocumentationPage = () => {
 
 
   return (
-<div>
+<div className="flex justify-center">
   Documentation
 </div>
   );

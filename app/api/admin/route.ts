@@ -8,7 +8,7 @@ export async function GET(){
   const role = await currentRole()
 
   if(role === 'Admin'){
-    return NextResponse.json(users)}
+    return NextResponse.json(users?.map(user => ({id: user.id, username: user.username, role: user.role, name: user.name}) ) || [])}
   else{
     return NextResponse.json({error: 'Unauthorized'})
   }

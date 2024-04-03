@@ -5,7 +5,7 @@
 const AboutPage = () => {
 
   return (
-    <div>
+    <div className="flex justify-center">
 About
     </div>
   );
