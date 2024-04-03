@@ -6,7 +6,9 @@ const SettingsPage =  () => {
 
 
   return (
+    <div className="flex justify-center">
     <SettingsForm />
+    </div>
 
   );
 }
