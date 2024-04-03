@@ -10,8 +10,6 @@ interface LoginButtonProps {
 
 export const LoginButton = ({ 
   children,
-  mode = "redirect",
-  asChild
 }: LoginButtonProps) => {
   const router = useRouter()
 
@@ -20,12 +18,6 @@ export const LoginButton = ({
 
   }
 
-  if (mode === "modal") {
-    return(
-    <span>
-      TODO implements modal
-    </span>
-  )}
 
     return(
       <span onClick={onClick} className="cursor-pointer">

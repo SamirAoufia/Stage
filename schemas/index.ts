@@ -31,3 +31,14 @@ export const NewPasswordSchema = z.object({
     message: "Minimum of 6 characters required",
   }),
 });
+
+export const ResetPasswordSchema = z.object({
+
+  id: z.string().min(1, {
+    message: "Id is required",
+  }),
+
+  password: z.string().min(6, {
+    message: "Minimum of 6 characters required",
+  }),
+});

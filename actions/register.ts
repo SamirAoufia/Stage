@@ -32,7 +32,6 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         }
   })
 
-//todo send verification 
 
   return {success: "Utilisateur enregistré avec succès"}
 }
