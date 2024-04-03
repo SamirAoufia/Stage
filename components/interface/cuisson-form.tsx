@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Button } from '@/components/ui/button';
 import { DateRangePicker } from '@/components/calendrier/data-picker-cuisson';
 
@@ -135,7 +135,8 @@ const CuissonForm = () => {
 
 
 
-      <div className='mt-10'>
+      <div className='flex justify-center h-[600px] mt-10'>
+      <ResponsiveContainer width="90%" height="100%">
         <LineChart width={1600} height={600} data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="_time" />
@@ -151,6 +152,7 @@ const CuissonForm = () => {
           { humidity === 1 ? <Line type="monotone" dataKey="Humidity" stroke=" #e406b8 " /> : null }
           { mlxTemp === 1 ? <Line type="monotone" dataKey="MlxTemp" stroke=" #AB9D62 " /> : null }
         </LineChart>
+      </ResponsiveContainer>
       </div>
     </main>
   );

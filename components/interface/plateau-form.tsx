@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import {
   Select,
   SelectContent,
@@ -86,8 +86,9 @@ const PlateauForm = () => {
           </div>
 
           
-          <div className='mt-8'>
-          <LineChart width={1600} height={600} data={data}>
+          <div className='flex justify-center h-[600px] mt-8'>
+        <ResponsiveContainer width="90%" height="100%">
+          <LineChart  data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="_time" />
             <YAxis />
@@ -95,6 +96,7 @@ const PlateauForm = () => {
             <Legend />
             <Line type="monotone" dataKey="Ptot" stroke="#049abb" />
           </LineChart>
+        </ResponsiveContainer>
         </div>
 
       </main>
@@ -104,21 +106,3 @@ const PlateauForm = () => {
 }
 
 export default PlateauForm;
-{/* <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
-        Télécharger CSV
-      </Button>
-
-      <DateRangePicker locale='fr' />
-        </div>
-
-        <div className='mt-8'>
-          <LineChart width={1600} height={600} data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="_time" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="Ptot" stroke="#049abb" />
-          </LineChart>
-        </div>
-      </main> */}
