@@ -33,8 +33,8 @@ export async function POST(req: Request) {
   const body = await req.json();
   f1 = body.from;
   f2 = body.to;
-  console.log("f1 = ",f1);
-  console.log("f2 = ",f2);
+  // console.log("f1 = ",f1);
+  // console.log("f2 = ",f2);
 
 
   return new Response('ok')

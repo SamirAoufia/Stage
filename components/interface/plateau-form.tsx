@@ -52,7 +52,7 @@ const PlateauForm = () => {
   return (
 
       <main>
-        <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE</h1>
+        <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE PLATEAU</h1>
 
 
 

@@ -81,7 +81,7 @@ const CuissonForm = () => {
   return (
     <main>
       
-      <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE</h1>
+      <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE CUISSON</h1>
       <div className='flex items-center justify-center'> <DateRangePicker locale='fr'/></div>
       <div className='flex justify-center gap-x-5'>
           <Button
