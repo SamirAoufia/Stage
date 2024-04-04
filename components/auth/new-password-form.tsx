@@ -50,7 +50,7 @@ export const NewPasswordForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="Enter a new password"
+      headerLabel="Nouveaux mot de passe"
       backButtonLabel=""
       backButtonHref=""
     >
@@ -65,7 +65,7 @@ export const NewPasswordForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>mot de passe</FormLabel>
                   <FormControl>
                     <Input
                       {...field}

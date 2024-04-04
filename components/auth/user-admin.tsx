@@ -21,9 +21,7 @@ import { FormSuccess } from "@/components/form-success";
 
 
 const AllUsers = () => {
-  const [users, setUsers] = useState<null | { id: string; name: string | null; username: string | null; password: string | null; image: string | null; role: Role; }[]>(null)
-  const [error, setError] = useState<string | undefined>("")
-  const [success, setSuccess] = useState<string | undefined>("")
+  const [users, setUsers] = useState<null | { id: string; name: string | null; username: string | null; password: string | null; image: string | null; role: Role; error: string | undefined; success: string | undefined; }[]>(null)
   const [isPending, startTransition] = useTransition()
   useEffect(() => {
     handleUserApi()
@@ -32,25 +30,34 @@ const AllUsers = () => {
   const password = "123456"
 
   const reset = async (id: string) => {
-    setError("")
-    setSuccess("")
-
     startTransition(() => {
       resetPassword({ id, password })
-        .then((valeur) => {
-        setError(valeur.Error),
-        setSuccess(valeur.success)
+        .then((response) => {
+          const updatedUsers = users?.map(user => {
+            if (user.id === id) {
+              return {
+                ...user,
+                error: response.Error,
+                success: response.success
+              };
+            }
+            return user;
+          });
+          setUsers(updatedUsers || null);
         });
     });
   };
 
-
-
   const handleUserApi = async () => {
     const response = await fetch('../api/admin',)
     const data = await response.json()
-    setUsers(data)
-
+    // Ajoutez des champs error et success à chaque utilisateur avec une valeur initiale undefined
+    const formattedUsers = data.map((user: any) => ({
+      ...user,
+      error: undefined,
+      success: undefined
+    }));
+    setUsers(formattedUsers);
   }
 
   return (
@@ -67,6 +74,7 @@ const AllUsers = () => {
                 <TableHead>Username</TableHead>
                 <TableHead>Nom</TableHead>
                 <TableHead>Role</TableHead>
+                <TableHead>Reset</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -75,15 +83,20 @@ const AllUsers = () => {
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.role}</TableCell>
-
+                <TableCell><div className=" flex justify-center ">
+                <Button onClick={(event) => reset(user.id)}  className="hover:bg-[#AB9D62]">Reset</Button>
+              </div></TableCell>
+              
               </TableRow>
-              <div className="mt-5 flex justify-center ">
-                <Button onClick={(event) => reset(user.id)} >Reset</Button>
-                <FormError message={error} />
-                <FormSuccess message={success} />
-                
-              </div>
+              <TableRow>
+                <TableCell colSpan={5}>
+                  {/* Affichez le message d'erreur ou de succès uniquement s'il existe pour cet utilisateur */}
+                  {user.error && <FormError message={user.error} />}
+                {user.success && <FormSuccess message={user.success} />}
+                </TableCell>
+              </TableRow>
             </TableBody>
+            
           </Table>
           </div>
         ))}
@@ -97,3 +110,4 @@ const AllUsers = () => {
 }
 
 export default AllUsers
+

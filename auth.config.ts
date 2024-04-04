@@ -6,6 +6,9 @@ import Credentials from "next-auth/providers/credentials";
 
 export default {
   providers: [
+
+    
+
     Credentials({
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
@@ -27,5 +30,6 @@ export default {
         return null;
       }
     })
+    
   ],
 } satisfies NextAuthConfig
