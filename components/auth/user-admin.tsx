@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button"
 import { resetPassword } from "@/actions/reset-password"
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { deleteUser } from "@/actions/delete-user"
 
 
 
@@ -23,6 +24,7 @@ import { FormSuccess } from "@/components/form-success";
 const AllUsers = () => {
   const [users, setUsers] = useState<null | { id: string; name: string | null; username: string | null; password: string | null; image: string | null; role: Role; error: string | undefined; success: string | undefined; }[]>(null)
   const [isPending, startTransition] = useTransition()
+  const [isPending2, startTransition2] = useTransition()
   useEffect(() => {
     handleUserApi()
   }, [])
@@ -47,6 +49,25 @@ const AllUsers = () => {
         });
     });
   };
+
+  const deleteuser = async (id: string) => {
+    startTransition(() => {
+      deleteUser({ id })
+        .then((response) => {
+          const updatedUsers = users?.map(user => {
+            if (user.id === id) {
+              return {
+                ...user,
+                error: response.Error,
+                success: response.success
+              };
+            }
+            return user;
+          });
+          setUsers(updatedUsers || null);
+        });
+    });
+  }
 
   const handleUserApi = async () => {
     const response = await fetch('../api/admin',)
@@ -74,7 +95,8 @@ const AllUsers = () => {
                 <TableHead>Username</TableHead>
                 <TableHead>Nom</TableHead>
                 <TableHead>Role</TableHead>
-                <TableHead>Reset</TableHead>
+                <TableHead>Reset MDP</TableHead>
+                <TableHead>Supprimer Utilisateur</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -83,13 +105,16 @@ const AllUsers = () => {
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.role}</TableCell>
-                <TableCell><div className=" flex justify-center ">
+                <TableCell>
                 <Button onClick={(event) => reset(user.id)}  className="hover:bg-[#AB9D62]">Reset</Button>
-              </div></TableCell>
+              </TableCell>
+              <TableCell>
+                <Button onClick={(event) => deleteuser(user.id)}  className="hover:bg-[#AB9D62]">Supprimer</Button>
+              </TableCell>
               
               </TableRow>
               <TableRow>
-                <TableCell colSpan={5}>
+                <TableCell colSpan={6}>
                   {/* Affichez le message d'erreur ou de succès uniquement s'il existe pour cet utilisateur */}
                   {user.error && <FormError message={user.error} />}
                 {user.success && <FormSuccess message={user.success} />}

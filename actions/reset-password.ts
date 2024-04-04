@@ -25,5 +25,5 @@ export const resetPassword = async (
     data: { password: hashedPassword },
   });
 
-  return { success: "Password updated!" };
+  return { success: "Mot de passe réinitialiser" };
 }
