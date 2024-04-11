@@ -2,12 +2,10 @@
 
 import { UserButton } from "@/components/auth/userAvatar";
 import Image from "next/image";
-
 import * as React from "react"
 import Link from "next/link"
- 
 import { cn } from "@/lib/utils"
-
+import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -21,6 +19,7 @@ import {
 
 export const Navbar = () => {
 
+  const pathname = usePathname();
 
   return (
   <main className=" flex justify-between items-center p-4 rounded-xl shadow-sm">
@@ -32,36 +31,28 @@ export const Navbar = () => {
 
     <NavigationMenu>
       <NavigationMenuList>
+      <NavigationMenuItem  >
+          <Link href="/information" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()} >
+              Information
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-          <NavigationMenuContent>
+          <NavigationMenuTrigger>Cuisson</NavigationMenuTrigger>
+          <NavigationMenuContent >
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
-                  >
-                    
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
-                  </a>
-                </NavigationMenuLink>
-              </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
+              
+              <ListItem href="/cuisson" title="Direct">
+              Graphique de la cuisson en direct.
               </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
+              <ListItem href="/cuisson/choix" title="Choix">
+              Choix de la date et du repas.
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
+              <ListItem href="/cuisson/ajout" title="Ajout">
+              Ajouter le repas.
               </ListItem>
+              
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -73,19 +64,33 @@ export const Navbar = () => {
               <ListItem href="/plateau" title="Direct">
                 Graphique des plateaux en direct.
               </ListItem>
-              <ListItem href="/docs/installation" title="Ajout personne">
+              <ListItem href="/plateau/personne" title="Ajout personne">
                 Ajouter les repas & les personnes.
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Choix">
+              <ListItem href="/plateau/choix" title="Choix">
                 Choix de la date et de la personne.
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Ajout plateau">
+              <ListItem href="/plateau/plateau" title="Ajout plateau">
                 Code a ajouter pour un nouveau plateau.
               </ListItem>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
+          <NavigationMenuTrigger>Bluetooth</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              
+              <ListItem href="/bluetooth" title="Direct">
+                Graphique des plateaux en direct.
+              </ListItem>
+              <ListItem href="/bluetooth/choix" title="Choix">
+                Choix de la date et de la personne.
+              </ListItem>
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem >
           <Link href="/documentation" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Documentation
