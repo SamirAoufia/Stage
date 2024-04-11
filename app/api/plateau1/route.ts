@@ -19,7 +19,7 @@ export async function GET() {
 
 
   //const fluxQuery = 'from(bucket: "PLATEAU1") |> range(start: -30d)   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: ["_start", "table","_stop", "_measurement", "device", "SSID","result" ])   |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")';
-  const date = `from(bucket: "PLATEAU1") |> range(start: ${f1} , stop: ${f2})   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: ["_start", "table","_stop", "_measurement", "device", "SSID","result" ])   |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")`;
+  const date = `from(bucket: "PLATEAU1") |> range(start: ${f1} , stop: ${f2})   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: ["_start", "table","_stop", "_measurement", "device", "SSID","result" ])  |> truncateTimeColumn(unit: 1s)  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")`;
 
   const data = await queryInfluxDB(date);
 
