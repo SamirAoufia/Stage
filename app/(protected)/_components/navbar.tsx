@@ -9,6 +9,7 @@ export const Navbar = () => {
   const pathname = usePathname();
 
   return (
+
     <nav className="flex justify-between items-center p-4 rounded-xl shadow-sm">
         <div className="flex items-start">
           <Image src="/LSGlogo.svg" alt="logo" width={150} height={150} />
@@ -41,5 +42,7 @@ export const Navbar = () => {
         <UserButton />
       </div>
     </nav>
+
+
   );
 };

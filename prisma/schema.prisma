@@ -44,3 +44,12 @@ model Account {
 
   @@unique([provider, providerAccountId])
 }
+
+model Cuisson{
+  id Int @id @default(autoincrement())
+  name String
+  description String?
+  debut String
+  fin String
+
+}
