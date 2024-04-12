@@ -235,12 +235,7 @@ export const DateRangePicker2: FC<DateRangePicker2Props> & {
   // non : {range.to?.toString()}
 
  
-  // useEffect(() => {
-  //   PostDataToAPI();
-  //    // Appeler l'API une fois au chargement initial
-  //   const intervalId = setInterval(PostDataToAPI, 2000); // Mettre à jour toutes les 2 secondes
-  //   return () => clearInterval(intervalId); // Nettoyer l'intervalle lors du démontage
-  // }, []); // Rafraîchir les données lorsque la valeur sélectionnée change
+
 
   // Fonction pour récupérer les données de l'API
   async function PostDataToAPI() {
