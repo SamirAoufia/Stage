@@ -1,1 +1,32 @@
 $2a$10$lS5moQMLbTmvf9Qikb4LuOfJ8zMcAiM6h.KTnbugugsv7GXo8925G
+
+
+import React, { useState } from "react";
+import { TimeField } from "./time-field";
+import { DateField } from "./date-field";
+
+const DateTimeRangePicker = () => {
+  const [startDateTime, setStartDateTime] = useState(null);
+  const [endDateTime, setEndDateTime] = useState(null);
+
+  const handleStartDateTimeChange = (dateTime) => {
+    setStartDateTime(dateTime);
+  };
+
+  const handleEndDateTimeChange = (dateTime) => {
+    setEndDateTime(dateTime);
+  };
+
+  return (
+    <div>
+      <div>
+        <label htmlFor="startDateTime">Début :</label>
+        <DateField id="startDateTime" />
+        <TimeField value={startDateTime} onChange={handleStartDateTimeChange} />
+        <TimeField value={endDateTime} onChange={handleEndDateTimeChange} />
+      </div>
+    </div>
+  );
+};
+
+export default DateTimeRangePicker;
