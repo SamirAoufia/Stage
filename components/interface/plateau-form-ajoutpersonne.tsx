@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 
 import { Button } from "@/components/ui/button";
-import {DateTimeplateau}  from '@/components/calendrier-heure/date-time-picker';
+import DateRangePicker2 from '@/components/calendrier/data-picker-time-plateau1';
 
 
 
@@ -48,10 +48,8 @@ const PlateauForm = () => {
             {selectedPlateau === 'plateau1' && (
               <>
 
-              <DateTimeplateau  granularity={"minute"}/>
-              <Button className=" hover:bg-[#AB9D62]">
-            Télécharger CSV
-          </Button></>
+              <DateRangePicker2  />
+              </>
 
             )}
             {selectedPlateau === 'plateau2' && (

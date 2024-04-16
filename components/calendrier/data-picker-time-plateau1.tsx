@@ -1,36 +1,3 @@
-$2a$10$lS5moQMLbTmvf9Qikb4LuOfJ8zMcAiM6h.KTnbugugsv7GXo8925G
-
-
-import React, { useState } from "react";
-import { TimeField } from "./time-field";
-import { DateField } from "./date-field";
-
-const DateTimeRangePicker = () => {
-  const [startDateTime, setStartDateTime] = useState(null);
-  const [endDateTime, setEndDateTime] = useState(null);
-
-  const handleStartDateTimeChange = (dateTime) => {
-    setStartDateTime(dateTime);
-  };
-
-  const handleEndDateTimeChange = (dateTime) => {
-    setEndDateTime(dateTime);
-  };
-
-  return (
-    <div>
-      <div>
-        <label htmlFor="startDateTime">Début :</label>
-        <DateField id="startDateTime" />
-        <TimeField value={startDateTime} onChange={handleStartDateTimeChange} />
-        <TimeField value={endDateTime} onChange={handleEndDateTimeChange} />
-      </div>
-    </div>
-  );
-};
-
-export default DateTimeRangePicker;
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 'use client '
 
 // DateRangePicker2.tsx
@@ -39,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import DateInput from './date-input-time'; // Assuming the DateInput component is in the same directory
 import { ChevronUpIcon, ChevronDownIcon } from '@radix-ui/react-icons';
+import { Input } from '../ui/input';
 
 interface DateRangePicker2Props {
   onUpdate?: (values: { date: Date; startHour: number; startMinute: number; endHour: number; endMinute: number }) => void;
@@ -110,53 +78,58 @@ const DateRangePicker2: FC<DateRangePicker2Props> = ({
         <div className="flex py-2">
           <div className="flex flex-col">
             <div className="flex flex-col gap-2">
-              <div className="flex gap-2">
+              <div className="flex  justify-center gap-2">
                 <DateInput value={selectedDate} onChange={handleDateChange} onSelectHour={function (hour: number): void {
                   throw new Error('Function not implemented.');
                 } } onSelectMinute={function (minute: number): void {
                   throw new Error('Function not implemented.');
                 } } label={''} />
               </div>
-              <div className="flex gap-2">
-                <input
-                  type="number"
-                  value={startHour}
-                  onChange={(e) => setStartHour(parseInt(e.target.value))}
-                  min={0}
-                  max={23}
-                />
-                <span>:</span>
-                <input
-                  type="number"
-                  value={startMinute}
-                  onChange={(e) => setStartMinute(parseInt(e.target.value))}
-                  min={0}
-                  max={59}
-                />
-              </div>
-              <div className="flex gap-2">
-                <input
-                  type="number"
-                  value={endHour}
-                  onChange={(e) => setEndHour(parseInt(e.target.value))}
-                  min={0}
-                  max={23}
-                />
-                <span>:</span>
-                <input
-                  type="number"
-                  value={endMinute}
-                  onChange={(e) => setEndMinute(parseInt(e.target.value))}
-                  min={0}
-                  max={59}
-                />
-              </div>
+              <div className="flex flex-col mt-5 gap-2">
+  <div className="border p-2 rounded-lg">
+    <p>Début : </p>
+    <div className="flex gap-2 ">
+      <Input
+        type="number"
+        value={startHour}
+        onChange={(e) => setStartHour(parseInt(e.target.value))}
+        min={0}
+        max={23}
+      />
+      <span>:</span>
+      <Input
+        type="number"
+        value={startMinute}
+        onChange={(e) => setStartMinute(parseInt(e.target.value))}
+        min={0}
+        max={59}
+      />
+    </div>
+  </div>
+  <div className="border p-2 rounded-lg">
+    <p>Fin : </p>
+    <div className="flex gap-2">
+      <Input
+        type="number"
+        value={endHour}
+        onChange={(e) => setEndHour(parseInt(e.target.value))}
+        min={0}
+        max={23}
+      />
+      <span>:</span>
+      <Input
+        type="number"
+        value={endMinute}
+        onChange={(e) => setEndMinute(parseInt(e.target.value))}
+        min={0}
+        max={59}
+      />
+    </div>
+  </div>
+</div>
+
             </div>
           </div>
-        </div>
-        <div className="flex justify-end gap-2 py-2 pr-4">
-          <Button onClick={() => setIsOpen(false)}>Cancel</Button>
-          <Button onClick={handleUpdate}>Update</Button>
         </div>
       </PopoverContent>
     </Popover>
