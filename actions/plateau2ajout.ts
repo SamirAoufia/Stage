@@ -4,7 +4,7 @@ import * as z from "zod"
 import {db} from "@/lib/db"
 import { PlateauSchema } from "@/schemas"
 
-export const addPlateau1 = async (values: z.infer<typeof PlateauSchema>) => {
+export const addPlateau2 = async (values: z.infer<typeof PlateauSchema>) => {
   const valitation = PlateauSchema.safeParse(values)
 
     if(!valitation.success) {
@@ -13,7 +13,7 @@ export const addPlateau1 = async (values: z.infer<typeof PlateauSchema>) => {
 
   const {name, date,description, debutheure,debutminute, finheure, finminute} = valitation.data
 
-  await db.plateau1.create({
+  await db.plateau2.create({
     data: {
       name,
       description,
@@ -25,5 +25,5 @@ export const addPlateau1 = async (values: z.infer<typeof PlateauSchema>) => {
         }
   })
 
-  return {success: "Date du plateau 1 ajouté avec succès"}
+  return {success: "Date du plateau 2 ajouté avec succès"}
 }

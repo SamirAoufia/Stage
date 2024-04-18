@@ -13,16 +13,23 @@ import {
 import { PlateauSchema } from "@/schemas"
 import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
-import { addPlateau1 } from "@/actions/plateau1ajout"
+import { addPlateau2 } from "@/actions/plateau2ajout"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 
-export const Plateau1FormAjoutPersonne = () => {
+
+
+export const Plateau2FormAjoutPersonne = () => {
+
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | undefined>("")
   const [success, setSuccess] = useState<string | undefined>("")
+
+
+
+
   const form = useForm<z.infer<typeof PlateauSchema>>({
     resolver: zodResolver(PlateauSchema),
     defaultValues: {
@@ -40,7 +47,7 @@ export const Plateau1FormAjoutPersonne = () => {
     setSuccess("")
 
     startTransition(() => {
-      addPlateau1(values)
+      addPlateau2(values)
         .then((value) => {
           setError(value.Error),
           setSuccess(value.success)
@@ -48,7 +55,10 @@ export const Plateau1FormAjoutPersonne = () => {
     })
     
   }
+
+
   return (
+
     <Card className="p-5">
     <Form {...form} >
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -62,12 +72,13 @@ export const Plateau1FormAjoutPersonne = () => {
                 <FormControl>
                   <Input {...field}
                     disabled={isPending}
-                    placeholder="Nathan"/>
+                    placeholder="Samir"/>
                 </FormControl>
                 <FormMessage/>
               </FormItem>
             )}
             />
+
         <FormField control={form.control }
             name="description"
             render={({ field }) => (
@@ -82,6 +93,7 @@ export const Plateau1FormAjoutPersonne = () => {
               </FormItem>
             )}
             />
+
           <FormField control={form.control }
             name="date"
             render={({ field }) => (
@@ -90,14 +102,17 @@ export const Plateau1FormAjoutPersonne = () => {
                 <FormControl>
                 <Input {...field}
                     disabled={isPending}
-                    type="date"               
+                    type="date"
+                    
                   />
+                    
                 </FormControl>
                 <FormMessage/>
               </FormItem>
             )}
             />
         <FormField control={form.control }
+            
             name="debutheure"
             render={({ field }) => (
               <FormItem> 

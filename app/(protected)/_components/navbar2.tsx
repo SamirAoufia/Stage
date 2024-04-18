@@ -5,7 +5,6 @@ import Image from "next/image";
 import * as React from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,7 +18,6 @@ import {
 
 export const Navbar = () => {
 
-  const pathname = usePathname();
 
   return (
   <main className=" flex justify-between items-center p-4 rounded-xl shadow-sm">
@@ -47,10 +45,10 @@ export const Navbar = () => {
               Graphique de la cuisson en direct.
               </ListItem>
               <ListItem href="/cuisson/choix" title="Choix">
-              Choix de la date et du repas.
+              Choix de la date et  du repas.
               </ListItem>
               <ListItem href="/cuisson/ajout" title="Ajout">
-              Ajouter le repas.
+              Ajouter le repas avec la date.
               </ListItem>
               
             </ul>
@@ -65,10 +63,10 @@ export const Navbar = () => {
                 Graphique des plateaux en direct.
               </ListItem>
               <ListItem href="/plateau/personne" title="Ajout personne">
-                Ajouter les repas & les personnes.
+                Ajouter les personnes & les repas.
               </ListItem>
               <ListItem href="/plateau/choix" title="Choix">
-                Choix de la date et de la personne.
+                Choix de la date et / ou de la personne.
               </ListItem>
               <ListItem href="/plateau/plateau" title="Ajout plateau">
                 Code a ajouter pour un nouveau plateau.
@@ -82,10 +80,10 @@ export const Navbar = () => {
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               
               <ListItem href="/bluetooth" title="Direct">
-                Graphique des plateaux en direct.
+                Graphique en direct de la connexion bluetooth.
               </ListItem>
               <ListItem href="/bluetooth/choix" title="Choix">
-                Choix de la date et de la personne.
+                Choix de la date.
               </ListItem>
             </ul>
           </NavigationMenuContent>

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import {
   Select,
@@ -8,35 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-
-
-import { Button } from "@/components/ui/button";
-
-import { PlateauFormAjoutPersonne } from '../ajout/addplateau1';
-
-
-
+import { Plateau1FormAjoutPersonne } from '@/components/ajout/addplateau1';
+import { Plateau2FormAjoutPersonne } from '@/components/ajout/addplateau2';
 
 const PlateauForm = () => { 
-
-
-  const [selectedPlateau, setSelectedPlateau] = useState(''); // Défaut sélectionné
-
-
-
-
-
-
-
+  const [selectedPlateau, setSelectedPlateau] = useState(''); 
   return (
-    
-
       <main >
         <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE PLATEAU</h1>
-
-
-
         <div className=' flex justify-center mt-6 '>
           <Select onValueChange={(value) => setSelectedPlateau(value)} >
             <SelectTrigger className="w-[280px]">
@@ -50,26 +29,15 @@ const PlateauForm = () => {
           </div>
 
           <div className='flex justify-center mt-6 gap-x-5 '>
-            
             {selectedPlateau === 'plateau1' && (
               <>
-
-                <PlateauFormAjoutPersonne/>
-
-              
-              </>
-
-            )}
+                <Plateau1FormAjoutPersonne/>
+                </>)}
             {selectedPlateau === 'plateau2' && (
               <>
- 
-              <Button  className=" hover:bg-[#AB9D62]">
-            Télécharger CSV
-          </Button></>
+              <Plateau2FormAjoutPersonne/></>
             )}
           </div>
-
-
       </main>
           
 
