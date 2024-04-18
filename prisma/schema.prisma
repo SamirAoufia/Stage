@@ -66,3 +66,13 @@ model Plateau2{
   finheure String
   finminute String
 }
+
+model Cuisson{
+  id Int @id @default(autoincrement())
+  name String
+  date String
+  debutheure String
+  debutminute String
+  finheure String
+  finminute String
+}
