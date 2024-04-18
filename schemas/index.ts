@@ -48,3 +48,26 @@ export const DeleteUserSchema = z.object({
     message: "Id is required",
   }),
 });
+
+export const PlateauSchema = z.object({
+  name: z.string().min(1, {
+    message: "Name is required",
+  }),
+  description: z.string(),
+  
+  date: z.string().min(1, {
+    message: "Date is required",
+  }),
+  debutheure: z.string().min(1, {
+    message: "Start time is required",
+  }),
+  debutminute: z.string().min(1, {
+    message: "Start time is required",
+  }),
+  finheure: z.string().min(1, {
+    message: "End time is required",
+  }),
+  finminute: z.string().min(1, {
+    message: "End time is required",
+  }),
+});

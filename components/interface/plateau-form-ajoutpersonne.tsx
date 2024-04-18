@@ -9,13 +9,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+
+
 import { Button } from "@/components/ui/button";
-import DateRangePicker2 from '@/components/calendrier/data-picker-time-plateau1';
+
+import { PlateauFormAjoutPersonne } from '../ajout/addplateau1';
+
 
 
 
 const PlateauForm = () => { 
-  const [data, setData] = useState([]);
+
+
   const [selectedPlateau, setSelectedPlateau] = useState(''); // Défaut sélectionné
 
 
@@ -25,8 +30,9 @@ const PlateauForm = () => {
 
 
   return (
+    
 
-      <main>
+      <main >
         <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE PLATEAU</h1>
 
 
@@ -48,7 +54,9 @@ const PlateauForm = () => {
             {selectedPlateau === 'plateau1' && (
               <>
 
-              <DateRangePicker2  />
+                <PlateauFormAjoutPersonne/>
+
+              
               </>
 
             )}
