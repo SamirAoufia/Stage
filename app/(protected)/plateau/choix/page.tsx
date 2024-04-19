@@ -3,7 +3,7 @@ import PlateauForm from '@/components/interface/plateau-form-choix';
 
 
 
-const PlateauPage = () => {
+const PlateauPageChoix = () => {
 
 
   return (
@@ -14,4 +14,4 @@ const PlateauPage = () => {
 }
 
 
-export default PlateauPage
+export default PlateauPageChoix

@@ -68,7 +68,7 @@ const PlateauForm = () => {
           </Select>
           </div>
 
-          <div className='flex justify-center mt-6 '>
+          <div className='flex justify-center mt-6 space-x-5 '>
             
             {selectedPlateau === 'plateau1' && (
               <>

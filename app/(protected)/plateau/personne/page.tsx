@@ -3,7 +3,7 @@ import PlateauForm from '@/components/interface/plateau-form-ajoutpersonne';
 
 
 
-const PlateauPage = () => {
+const PlateauPageAjout = () => {
 
 
   return (
@@ -14,4 +14,4 @@ const PlateauPage = () => {
 }
 
 
-export default PlateauPage
+export default PlateauPageAjout

@@ -34,3 +34,4 @@ export const getAllUsers = async () => {
     return null
   }
 }
+

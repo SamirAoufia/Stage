@@ -93,7 +93,7 @@ const PlateauForm = () => {
         <div className=' flex justify-center mt-6 '>
           <Select onValueChange={(value) => setSelectedPlateau(value)} >
             <SelectTrigger className="w-[280px]">
-              <SelectValue>{selectedPlateau}</SelectValue>
+              <SelectValue>{selectedPlateau} </SelectValue>
             </SelectTrigger>
             <SelectContent>
               <SelectItem  value={'plateau1direct'}>Plateau 1</SelectItem>

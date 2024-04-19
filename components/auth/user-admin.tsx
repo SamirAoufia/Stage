@@ -24,12 +24,11 @@ import { deleteUser } from "@/actions/delete-user"
 const AllUsers = () => {
   const [users, setUsers] = useState<null | { id: string; name: string | null; username: string | null; password: string | null; image: string | null; role: Role; error: string | undefined; success: string | undefined; }[]>(null)
   const [isPending, startTransition] = useTransition()
-  const [isPending2, startTransition2] = useTransition()
   useEffect(() => {
     handleUserApi()
   }, [])
 
-  const password = "123456"
+  const password = "123456" // Mot de passe par défaut pour la réinitialisation
 
   const reset = async (id: string) => {
     startTransition(() => {
