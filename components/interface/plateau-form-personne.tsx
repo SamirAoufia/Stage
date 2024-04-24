@@ -3,11 +3,21 @@
 import React, { useState, useEffect } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { set } from "date-fns";
+import { time } from "console";
+import { Button } from "../ui/button";
 
 const ChoixPersonne = () => {
   const [data, setData] = useState([]);
   const [selectedName, setSelectedName] = useState("");
   const [selectedDates, setSelectedDates] = useState([]);
+  const [selectedDateTime, setSelectedDateTime] = useState("");
+  const [rangedebut, setRangeDebut] = useState([]);
+  const [rangefin, setRangeFin] = useState([]);
+  const [selectedDescription, setSelectedDescription] = useState("");
+
+
+  
 
   useEffect(() => {
     handleUserApi();
@@ -18,64 +28,71 @@ const ChoixPersonne = () => {
       const response = await fetch('../api/plateau1choix');
       const data = await response.json();
       setData(data);
-      console.log(data); // Log the fetched data to the console
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-  // Obtenir les noms uniques à partir des données
+  async function PostDataToAPI() {
+    try {
+      const response = await fetch(`../api/plateau1choixdata`,{
+        method: 'POST',
+        body: JSON.stringify({from: rangedebut,to: rangefin}),
+      
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
   const uniqueNames = Array.from(new Set(data.map(personne => personne.name)));
 
-  // Gérer la sélection d'un nom depuis la table
-  const handleTableSelect = (name) => {
-    setSelectedName(name);
-    const selectedPersonDates = data.filter(personne => personne.name === name)
-      .map(personne => `${personne.date} ${personne.debuth}:${personne.debutm} - ${personne.finh}:${personne.finm}`);
-    setSelectedDates(selectedPersonDates);
-  };
 
-  // Gérer la sélection d'un nom depuis le Select
-  const handleNameSelect = (event) => {
-    const selectedName = event.target.value;
+
+  const handleNameSelect = (selectedName) => {
     setSelectedName(selectedName);
-
-    // Trouver les dates et heures correspondant au nom sélectionné
+    const selectedPerson = data.find(personne => personne.name === selectedName);
     const selectedPersonDates = data.filter(personne => personne.name === selectedName)
       .map(personne => `${personne.date} ${personne.debuth}:${personne.debutm} - ${personne.finh}:${personne.finm}`);
-    setSelectedDates(selectedPersonDates);
+  
+    setSelectedDates(selectedPersonDates.sort((a, b) => new Date(a.split(" ")[0]) - new Date(b.split(" ")[0])));
+    setSelectedDateTime("");
+    setSelectedDescription(selectedPerson ? selectedPerson.description : "");
   };
+  
+
+
+
+
+  const handleDateTimeSelect = (selectedDateTime) => {
+    setSelectedDateTime(selectedDateTime);
+
+    const [dateString, timeString,timeString2, timeString3] = selectedDateTime.split(" ");
+    // Extraire l'année, le mois et le jour de la date
+    const [year, month, day] = dateString.split("-");
+    // Extraire l'heure et les minutes du temps
+    const [hours, minutes] = timeString.split(":");
+    const [hours2, minutes2] = timeString3.split(":");
+  
+    // Créer un objet Date avec les valeurs extraites
+    const selectedDate = new Date(year, month - 1, day, hours, minutes);
+    const selectedDate2 = new Date(year, month - 1, day, hours2, minutes2);
+  
+    // Formater la date et l'heure dans le format requis
+    const formattedDateTime = selectedDate.toISOString();
+    const formattedDateTime2 = selectedDate2.toISOString();
+  
+    // Mettre à jour l'état avec la date et l'heure formatées
+    setRangeDebut(formattedDateTime);
+    setRangeFin(formattedDateTime2);
+  };
+  
 
   return (
     <main>
       <h1 className='flex items-center justify-center my-3 text-5xl text-[#AB9D62] underline'>
         Choix Personne
       </h1>
-
-      {data.map((personne: { id: string, name: string, date: string, debuth: string, debutm:string, finh:string,finm:string })  => (
-        <div key={personne.id} onClick={() => handleTableSelect(personne.name)}>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>Nom</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Heure de début</TableHead>
-                <TableHead>Heure de fin</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>{personne.id}</TableCell>
-                <TableCell>{personne.name}</TableCell>
-                <TableCell>{personne.date}</TableCell>
-                <TableCell>{personne.debuth}:{personne.debutm}</TableCell>
-                <TableCell>{personne.finh}:{personne.finm}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-      ))}
 
       <div className="flex justify-center mt-6">
         <Select onValueChange={handleNameSelect}>
@@ -92,12 +109,33 @@ const ChoixPersonne = () => {
         </Select>
       </div>
 
-      <div className="flex justify-center mt-6">
-        <ul>
-          {selectedDates.map((date, index) => (
-            <li key={index}>{date}</li>
-          ))}
-        </ul>
+      {selectedName && (
+        <div className="flex justify-center mt-6">
+          <Select onValueChange={handleDateTimeSelect}>
+            <SelectTrigger className="w-[280px]">
+              <SelectValue>{selectedDateTime}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {selectedDates.map((dateTime, index) => (
+                <SelectItem key={index} value={dateTime}>
+                  {dateTime}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
+
+
+
+      <div className="flex items-center justify-center mt-6 gap-x-5">
+      {selectedDescription && (
+  <p>Description: {selectedDescription}</p>
+)}
+        
+
+        <Button onClick={PostDataToAPI}>Envoyer</Button>
       </div>
     </main>
   );
