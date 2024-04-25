@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { set } from "date-fns";
-import { time } from "console";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 const ChoixPersonne = () => {
   const [data, setData] = useState([]);
@@ -15,6 +14,7 @@ const ChoixPersonne = () => {
   const [rangedebut, setRangeDebut] = useState([]);
   const [rangefin, setRangeFin] = useState([]);
   const [selectedDescription, setSelectedDescription] = useState("");
+  const [dataGraphique, setDataGraphique] = useState([]);
 
 
   
@@ -22,6 +22,16 @@ const ChoixPersonne = () => {
   useEffect(() => {
     handleUserApi();
   }, []);
+
+  const handlegraphiqueapi = async () => {
+    try {
+      const response = await fetch('../api/plateau1choixdata');
+      const data = await response.json();
+      setDataGraphique(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
 
   const handleUserApi = async () => {
     try {
@@ -51,18 +61,19 @@ const ChoixPersonne = () => {
 
   const handleNameSelect = (selectedName) => {
     setSelectedName(selectedName);
-    const selectedPerson = data.find(personne => personne.name === selectedName);
-    const selectedPersonDates = data.filter(personne => personne.name === selectedName)
-      .map(personne => `${personne.date} ${personne.debuth}:${personne.debutm} - ${personne.finh}:${personne.finm}`);
+    const selectedPersonData = data.filter(personne => personne.name === selectedName);
   
-    setSelectedDates(selectedPersonDates.sort((a, b) => new Date(a.split(" ")[0]) - new Date(b.split(" ")[0])));
+    const selectedPersonDates = selectedPersonData.map(personne => `${personne.date} ${personne.debuth}:${personne.debutm} - ${personne.finh}:${personne.finm}`);
+    setSelectedDates(selectedPersonDates);
+  
+    const selectedPersonDescriptions = selectedPersonData.map(personne => personne.description);
+    setSelectedDescription(selectedPersonDescriptions);
     setSelectedDateTime("");
-    setSelectedDescription(selectedPerson ? selectedPerson.description : "");
   };
   
 
 
-
+  
 
   const handleDateTimeSelect = (selectedDateTime) => {
     setSelectedDateTime(selectedDateTime);
@@ -81,6 +92,9 @@ const ChoixPersonne = () => {
     // Formater la date et l'heure dans le format requis
     const formattedDateTime = selectedDate.toISOString();
     const formattedDateTime2 = selectedDate2.toISOString();
+
+
+
   
     // Mettre à jour l'état avec la date et l'heure formatées
     setRangeDebut(formattedDateTime);
@@ -127,18 +141,57 @@ const ChoixPersonne = () => {
       )}
 
 
+{selectedDateTime && selectedName && (
+  <div className="flex justify-center mt-6">
+    <p>Description : {selectedDescription[selectedDates.indexOf(selectedDateTime)]}</p>
+  </div>
+)}
+
+
+
+
 
 
       <div className="flex items-center justify-center mt-6 gap-x-5">
-      {selectedDescription && (
-  <p>Description: {selectedDescription}</p>
-)}
-        
 
-        <Button onClick={PostDataToAPI}>Envoyer</Button>
+      
+        <Button onClick={()=>
+        {PostDataToAPI();
+        handlegraphiqueapi();
+         }}>Envoyer</Button>
       </div>
+
+
+      <div className='flex justify-center h-[600px] mt-8'>
+        <ResponsiveContainer width="90%" height="100%">
+          <LineChart  data={dataGraphique}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="_time" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="Ptot" stroke="#049abb" />
+          </LineChart>
+        </ResponsiveContainer>
+        </div>
+
+       {/* {dataGraphique.map((donnée, index) => (
+        <div key={index}>
+          <p>{donnée._time} : {donnée.Ptot}</p>
+        </div>
+      )
+       )} */}
+
+       
+
+
     </main>
   );
 }
 
 export default ChoixPersonne;
+
+
+
+
+
