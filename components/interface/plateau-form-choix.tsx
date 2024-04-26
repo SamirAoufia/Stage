@@ -13,6 +13,9 @@ import { Button } from "@/components/ui/button";
 import { DateRangePicker } from '@/components/calendrier/data-picker-plateau1';
 import { DateRangePicker2 } from '@/components/calendrier/data-picker-plateau2';
 
+
+
+
 const PlateauForm = () => {
   const [data, setData] = useState([]);
   const [selectedPlateau, setSelectedPlateau] = useState(''); // Défaut sélectionné
@@ -68,25 +71,30 @@ const PlateauForm = () => {
           </Select>
           </div>
 
-          <div className='flex justify-center mt-6 space-x-5 '>
+          <div className='flex justify-center mt-6 space-x-5'>
             
             {selectedPlateau === 'plateau1' && (
               <>
-              <DateRangePicker locale='fr' /><Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
-            Télécharger CSV
-          </Button></>
+              <DateRangePicker locale='fr' />
+
+              <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
+                Télécharger CSV
+              </Button></>
 
             )}
             {selectedPlateau === 'plateau2' && (
               <>
-              <DateRangePicker2 locale='fr' /><Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
-            Télécharger CSV
-          </Button></>
+              <div className='gap-x-5'>
+              <DateRangePicker2 locale='fr'/>
+              <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
+                Télécharger CSV
+              </Button>
+              </div></>
             )}
           </div>
 
           
-          <div className='flex justify-center h-[600px] mt-8'>
+          {/* <div className='flex justify-center h-[600px] mt-8'>
         <ResponsiveContainer width="90%" height="100%">
           <LineChart  data={data}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -97,7 +105,7 @@ const PlateauForm = () => {
             <Line type="monotone" dataKey="Ptot" stroke="#049abb" />
           </LineChart>
         </ResponsiveContainer>
-        </div>
+        </div> */}
 
       </main>
           
