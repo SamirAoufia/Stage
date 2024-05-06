@@ -75,8 +75,11 @@ export const PlateauSchema = z.object({
 });
 
 export const CuissonSchema = z.object({
-  name: z.string().min(1, {
-    message: "Name is required",
+  plat: z.string().min(1, {
+    message: "plat is required",
+  }),
+  description: z.string().max(100, {
+    message: "Description is too long",
   }),
   
   date: z.string().min(1, {

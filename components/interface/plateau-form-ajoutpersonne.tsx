@@ -15,7 +15,7 @@ const PlateauForm = () => {
   const [selectedPlateau, setSelectedPlateau] = useState(''); 
   return (
       <main >
-        <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE PLATEAU</h1>
+        <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >Ajout Personne</h1>
         <div className=' flex justify-center mt-6 '>
           <Select onValueChange={(value) => setSelectedPlateau(value)} >
             <SelectTrigger className="w-[280px]">

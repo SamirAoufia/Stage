@@ -15,7 +15,7 @@ export const Navbar = () => {
           <Image src="/LSGlogo.svg" alt="logo" width={150} height={150} />
         </div>
 
-        <div className="hidden md:flex gap-x-2 items-center ">
+        <div className="hidden md:flex gap-x-2 items-center  ">
           <Button asChild variant={pathname === "/information" ? "default" : "outline"} className="hover:bg-[#AB9D62]">
             <Link href="/information">Information</Link>
           </Button>
@@ -38,7 +38,7 @@ export const Navbar = () => {
         </div>
 
 
-      <div className="items-end">
+      <div className="items-end ">
         <UserButton />
       </div>
     </nav>

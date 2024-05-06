@@ -8,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {json2csv} from 'json-2-csv';
 import { Button } from "@/components/ui/button";
 
 
@@ -68,18 +67,6 @@ const PlateauForm = () => {
     }
   }
 
-  const handleDownload = () => {
-    const csvData = json2csv(data);
-    const blob = new Blob([csvData], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download =  `${selectedPlateau}.csv`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-  };
 
 
 
@@ -106,9 +93,6 @@ const PlateauForm = () => {
             
             {selectedPlateau === 'plateau1direct' && (
               <>
-              <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
-            Télécharger CSV
-          </Button>
           
           <Button onClick={fiveminute} className=" hover:bg-[#AB9D62]">
             5 dernières minutes
@@ -126,9 +110,7 @@ const PlateauForm = () => {
             )}
             {selectedPlateau === 'plateau2direct' && (
               <>
-              <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
-            Télécharger CSV
-          </Button>
+ 
           <Button onClick={fiveminute} className=" hover:bg-[#AB9D62]">
             5 dernières minutes
           </Button>

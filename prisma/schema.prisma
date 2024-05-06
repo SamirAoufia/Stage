@@ -69,7 +69,8 @@ model Plateau2{
 
 model Cuisson{
   id Int @id @default(autoincrement())
-  name String
+  plat String
+  description String
   date String
   debutheure String
   debutminute String

@@ -62,7 +62,7 @@ export const Navbar = () => {
               <ListItem href="/plateau" title="Direct">
                 Graphique des plateaux en direct.
               </ListItem>
-              <ListItem href="/plateau/personne" title="Ajout personne">
+              <ListItem href="/plateau/ajout" title="Ajout personne">
                 Ajouter les personnes, la date & les repas.
               </ListItem>
               <ListItem href="/plateau/choix" title="Choix">

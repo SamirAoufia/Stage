@@ -1,15 +1,11 @@
 
-import ChoixPersonne from '@/components/interface/plateau-form-personne';
-
-
-
 
 const PlateauPageCode = () => {
 
 
   return (
 
-    <ChoixPersonne />
+<div> Oui OUi </div>
   );
 }
 

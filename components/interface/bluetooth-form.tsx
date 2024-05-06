@@ -4,9 +4,12 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import {json2csv} from 'json-2-csv';
 import { Button } from "@/components/ui/button";
 import { DateRangePicker } from '@/components/calendrier/data-picker-bluetooth';
+import { DataTablebluetooth } from '../datatable/datatablebluetooth';
+import { set } from 'date-fns';
 
 const BluetoothForm = () => {
   const [data, setData] = useState([]);
+  const [dataSent, setDataSent] = useState(false);
 
   useEffect(() => {
     fetchDataFromAPI();
@@ -20,6 +23,7 @@ const BluetoothForm = () => {
       const response = await fetch(`../api/bluetooth`);
       const data = await response.json();
       setData(data);
+
     }
     catch (error) {
       console.error('Error fetching data:', error);
@@ -58,6 +62,10 @@ const BluetoothForm = () => {
           <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
         Télécharger CSV
       </Button>
+
+      <Button onClick={() => setDataSent(!dataSent)} className=" hover:bg-[#AB9D62]">
+        Afficher le tableau
+        </Button>
         </div>
 
         <div className='flex justify-center h-[600px] mt-8'>
@@ -72,6 +80,13 @@ const BluetoothForm = () => {
           </LineChart>
         </ResponsiveContainer>
         </div>
+
+        {dataSent && (
+            <div className='p-16'> <DataTablebluetooth/></div>
+          )}
+
+        
+
       </main>
 
   );

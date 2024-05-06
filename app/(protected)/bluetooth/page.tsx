@@ -1,11 +1,11 @@
-import BluetoothForm from "@/components/interface/bluetooth-form";
+import BluetoothFormDirect from "@/components/interface/bluetooth-form-direct";
 
 
 
 const BluetoothPage = () => {
   return (
     <div>
-      <BluetoothForm />
+      <BluetoothFormDirect />
     </div>
   );
 }
