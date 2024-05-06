@@ -1,3 +1,4 @@
+// sert a rien
 "use client"
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -94,7 +95,7 @@ const PlateauForm = () => {
           </div>
 
           
-          {/* <div className='flex justify-center h-[600px] mt-8'>
+          <div className='flex justify-center h-[600px] mt-8'>
         <ResponsiveContainer width="90%" height="100%">
           <LineChart  data={data}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -105,7 +106,7 @@ const PlateauForm = () => {
             <Line type="monotone" dataKey="Ptot" stroke="#049abb" />
           </LineChart>
         </ResponsiveContainer>
-        </div> */}
+        </div>
 
       </main>
           

@@ -2,9 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { DataTableDemo } from '@/components/test/test';
+import { DataTableplateau1 } from '@/components/datatable/datatableplateau1';
+import { DataTableplateau2 } from '@/components/datatable/datatableplateau2';
+import {json2csv} from 'json-2-csv';
+import { Button } from "@/components/ui/button";
+import { 
+  Card,
+  CardHeader,
+  CardFooter,
+  CardContent,
+  CardTitle,
+  CardDescription
+} from "@/components/ui/card";
 
 
 
@@ -18,19 +28,35 @@ const ChoixPersonne = () => {
   const [selectedDescription, setSelectedDescription] = useState("");
   const [dataGraphique, setDataGraphique] = useState([]);
   const [dataSent, setDataSent] = useState(false);
-  const [selectedPlateau, setSelectedPlateau] = useState(''); // Défaut sélectionné
+  const [selectedPlateau, setSelectedPlateau] = useState('');  
+  
+  useEffect(() => {
+    if (dataSent) {
+      handlegraphiqueapi();
+    }
+  }, [dataSent]);
+  
+  
+  useEffect(() => {
+    if (selectedDateTime && selectedPlateau) {
+      PostDataToAPI();
+    }
+  }, [selectedDateTime, selectedPlateau]);
+  
 
 
   useEffect(() => {
-    handleUserApi();
-  }, []);
+    if (selectedPlateau) {
+      handleUserApi();
+    }
+  }, [selectedPlateau]);
 
   const handlegraphiqueapi = async () => {
     try {
       const response = await fetch(`../api/${selectedPlateau}`);
       const data = await response.json();
       setDataGraphique(data);
-      setDataSent(true);
+      setDataSent(false);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -53,7 +79,7 @@ const ChoixPersonne = () => {
         body: JSON.stringify({from: rangedebut,to: rangefin}),
       
       });
-      setDataSent(false);
+      setDataSent(true);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -64,6 +90,7 @@ const ChoixPersonne = () => {
 
 
   const handleNameSelect = (selectedName) => {
+    
     setSelectedName(selectedName);
     const selectedPersonData = data.filter(personne => personne.name === selectedName);
   
@@ -73,7 +100,11 @@ const ChoixPersonne = () => {
     const selectedPersonDescriptions = selectedPersonData.map(personne => personne.description);
     setSelectedDescription(selectedPersonDescriptions);
     setSelectedDateTime("");
+  
+  
   };
+
+  
   
 
 
@@ -99,17 +130,37 @@ const ChoixPersonne = () => {
 
 
 
-  
-    // Mettre à jour l'état avec la date et l'heure formatées
+
     setRangeDebut(formattedDateTime);
     setRangeFin(formattedDateTime2);
   };
   
+  const handlePlateauSelect = (value) => {
+    setSelectedPlateau(value);
+    setSelectedName("");
+    setSelectedDateTime(""); 
+  };
+
+
+  const handleDownload = () => {
+    const csvData = json2csv(dataGraphique);
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download =  `${selectedPlateau}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
 
   return (
     <main>
+
+<h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE PLATEAU</h1>
       <div className=' flex justify-center mt-6 '>
-          <Select onValueChange={(value) => setSelectedPlateau(value)} >
+          <Select onValueChange={handlePlateauSelect}  >
             <SelectTrigger className="w-[280px]">
               <SelectValue>{selectedPlateau}</SelectValue>
             </SelectTrigger>
@@ -155,7 +206,7 @@ const ChoixPersonne = () => {
         </Select>
         </>
     )}
-        
+  
       </div>
       
 
@@ -173,22 +224,28 @@ const ChoixPersonne = () => {
               ))}
             </SelectContent>
           </Select>
+         
         </div>
-      )}
-      <div className="flex items-center justify-center mt-6 gap-x-5">
-        <Button onClick={()=>
-        {PostDataToAPI();
-        handlegraphiqueapi();
-        }}>Envoyer</Button>
+      )} <div className="flex items-center justify-center mt-6 gap-x-5">
+    <Button onClick={handleDownload} className=" hover:bg-[#AB9D62]">
+                Télécharger CSV
+              </Button>
       </div>
+
 
 
 {selectedDateTime && selectedName && (
   <>
-  <div className="flex justify-center mt-6">
-    <p>Description : {selectedDescription[selectedDates.indexOf(selectedDateTime)]}</p>
-  </div>
-        
+<div className="flex justify-center mt-5 mb-5">
+
+  <Card>
+  <CardHeader>
+    <CardTitle>Description</CardTitle>
+    <CardDescription>{selectedDescription[selectedDates.indexOf(selectedDateTime)]}</CardDescription>
+  </CardHeader>
+</Card>
+
+          </div>
         
  <div className='flex justify-center h-[600px] '>
             <ResponsiveContainer width="90%" height="100%">
@@ -203,8 +260,11 @@ const ChoixPersonne = () => {
             </ResponsiveContainer>
           </div>
 
-          {dataSent && (
-            <div className="p-16"><DataTableDemo/></div>
+          {!dataSent &&  selectedPlateau === 'plateau1' &&(
+            <div className="p-16"><DataTableplateau1/></div>
+          )}
+          {!dataSent &&  selectedPlateau === 'plateau2' &&(
+            <div className="p-16"><DataTableplateau2/></div>
           )}
 
 

@@ -18,8 +18,9 @@ let f2 = '2023-03-27'  // Déclarer f2 en variable globale
 export async function GET() {
 
 
-  //const fluxQuery = 'from(bucket: "PLATEAU1") |> range(start: -5m)   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: ["_start", "table","_stop", "_measurement", "device", "SSID","result" ])  |> truncateTimeColumn(unit: 10s) |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")';
-  const date = `from(bucket: "PLATEAU2") |> range(start: ${f1} , stop: ${f2})   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: ["_start", "table","_stop", "_measurement", "device", "SSID","result" ])  |> truncateTimeColumn(unit: 10s) |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")`;
+  //const fluxQuery = 'from(bucket: "PLATEAU1") |> range(start: -30d)   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: ["_start", "table","_stop", "_measurement", "device", "SSID","result" ])   |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")';
+  const date = `from(bucket: "PLATEAU2") |> range(start: ${f1} , stop: ${f2})   |> filter(fn: (r) => r._field == "Ptot") |> drop(columns: [ "table", "_measurement", "device", "SSID","result" ])  |> truncateTimeColumn(unit: 10s)  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")`;
+
   const data = await queryInfluxDB(date);
 
   // 5. Gérer les requêtes et les réponses

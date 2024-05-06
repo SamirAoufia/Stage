@@ -38,7 +38,7 @@ import {
 
 
 
-export function DataTableDemo() {
+export function DataTableplateau2() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export function DataTableDemo() {
 
   async function fetchDataFromAPI() {
     try{
-      const response = await fetch(`../api/plateau1`);
+      const response = await fetch(`../api/plateau2`);
       const data = await response.json();
       setData(data);
     }
@@ -106,11 +106,25 @@ export function DataTableDemo() {
       <Input
   placeholder="Filtre par les valeurs"
   value={(table.getColumn("Ptot")?.getFilterValue() as string) ?? ""}
-  onChange={(event) =>
-    table.getColumn("Ptot")?.setFilterValue(event.target.value)
-  }
+  onChange={(event) => {
+    const value = event.target.value;
+    table.getColumn("Ptot")?.setFilterValue(value);
+    const regex = new RegExp(value, "i");
+    const filteredData = data.filter((item) =>
+      regex.test(item.Ptot.toString())
+    );
+    setData(filteredData);
+  }}
+  onInput={(event) => {
+    const value = event.target.value;
+    if (value === "") {
+      setData(data); // Réinitialiser les données
+    }
+  }}
   className="max-w-sm"
 />
+
+
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
