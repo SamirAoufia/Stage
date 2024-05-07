@@ -61,7 +61,17 @@ const PlateauForm = () => {
     try {
       const response = await fetch(`../api/${selectedPlateau}`);
       const responseData = await response.json();
-      setData(responseData);
+ // Ajuster les horodatages en ajoutant 2 heures
+ const adjustedData = responseData.map(item => {
+  // Convertir la chaîne de date en objet Date
+  const originalTime = new Date(item._time);
+  // Ajouter 2 heures
+  const adjustedTime = new Date(originalTime.getTime() + (2 * 60 * 60 * 1000));
+  // Mettre à jour l'horodatage dans l'objet
+  return { ...item, _time: adjustedTime.toISOString() };
+});
+      
+      setData(adjustedData);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -129,7 +139,14 @@ const PlateauForm = () => {
         <ResponsiveContainer width="90%" height="100%">
           <LineChart  data={data}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="_time" />
+            <XAxis dataKey="_time" tickFormatter={(time) => {
+    // Extraire l'heure de la chaîne de temps
+    const [, timeString] = time.split("T");
+    const [hours, minutes, seconds] = timeString.split(":")
+
+    // Formater l'heure avec les ajustements
+    return `${hours}:${minutes}:${seconds}`;
+  }} />
             <YAxis />
             <Tooltip />
             <Legend />

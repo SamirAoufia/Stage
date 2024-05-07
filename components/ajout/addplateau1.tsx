@@ -97,74 +97,75 @@ export const Plateau1FormAjoutPersonne = () => {
               </FormItem>
             )}
             />
-        <FormField control={form.control }
-            name="debutheure"
-            render={({ field }) => (
-              <FormItem> 
-                <FormLabel> Debut heure </FormLabel>
-                <FormControl>
-                <Input {...field}
-        type="number"
-        min={0}
-        max={23}
-      />
-                </FormControl>
-                <FormMessage/>
-              </FormItem>
-            )}
-            />
-            
-        <FormField control={form.control }
-            name="debutminute"
-            render={({ field }) => (
-              <FormItem> 
-                <FormLabel> Debut minute </FormLabel>
-                <FormControl>
-                <Input {...field}
-        type="number"
-        min={0}
-        max={59}
-      />
-                </FormControl>
-                <FormMessage/>
-              </FormItem>
-            )}
-            />
 
-        <FormField control={form.control }
-            name="finheure"
-            render={({ field }) => (
-              <FormItem> 
-                <FormLabel> fin heure </FormLabel>
-                <FormControl>
-                <Input {...field}
-        type="number"
-        min={0}
-        max={23}
-      />
-                </FormControl>
-                <FormMessage/>
-              </FormItem>
-            )}
-            />
-            
+<div className="border rounded p-2">
+             <div className="font-semibold">Debut</div>
+            <div className="grid grid-cols-2 gap-x-4">
 
-            <FormField control={form.control }
-            name="finminute"
-            render={({ field }) => (
-              <FormItem> 
-                <FormLabel> fin minute </FormLabel>
-                <FormControl>
-                <Input {...field}
-        type="number"
-        min={0}
-        max={59}
-      />
-                </FormControl>
-                <FormMessage/>
-              </FormItem>
-            )}
-            />
+              
+              <FormField
+                control={form.control}
+                name="debutheure"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Heure</FormLabel>
+                    <FormControl>
+                      <Input {...field} type="number" min={0} max={23} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            
+              <FormField
+                control={form.control}
+                name="debutminute"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Minute</FormLabel>
+                    <FormControl>
+                      <Input {...field} type="number" min={0} max={59} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              </div>
+              </div>
+              
+              <div className="border rounded p-2">
+             <div className="font-semibold">Fin</div>
+            <div className="grid grid-cols-2 gap-x-4">
+
+              <FormField
+                control={form.control}
+                name="finheure"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Heure</FormLabel>
+                    <FormControl>
+                      <Input {...field} type="number" min={0} max={23} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="finminute"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Minute</FormLabel>
+                    <FormControl>
+                      <Input {...field} type="number" min={0} max={59} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              </div>
+              </div>
             </div>
 
         

@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 import React, { useState, useEffect } from 'react';
 import {
   ChevronDownIcon,
@@ -18,7 +17,6 @@ import {
 } from "@tanstack/react-table"
 
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -35,27 +33,30 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-
-
-
-export function DataTableplateau2() {
+export function DataTableplateau1() {
   const [data, setData] = useState([]);
+  const [initialData, setInitialData] = useState([]); // Ajout de l'état pour stocker les données initiales
 
   useEffect(() => {
     fetchDataFromAPI();
-  }, []); 
+  }, []);
 
   async function fetchDataFromAPI() {
-    try{
+    try {
       const response = await fetch(`../api/plateau2`);
       const data = await response.json();
       setData(data);
-    }
-    catch (error) {
+      setInitialData(data); // Sauvegarde des données initiales
+    } catch (error) {
       console.error('Error fetching data:', error);
     }
-    
   }
+
+  // Restauration des données initiales lorsque le filtre est effacé
+  function resetData() {
+    setData(initialData);
+  }
+
   const columns: ColumnDef<any>[] = [
     {
       accessorKey: "_time",
@@ -64,13 +65,10 @@ export function DataTableplateau2() {
     },
     {
       accessorKey: "Ptot",
-      header: "Valeur totale",
+      header: "Poids total",
       cell: ({ row }) => <div>{row.getValue("Ptot")}</div>,
     },
   ];
-  
-
-
 
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -79,7 +77,6 @@ export function DataTableplateau2() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-
 
   const table = useReactTable({
     data,
@@ -103,29 +100,29 @@ export function DataTableplateau2() {
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-      <Input
-  placeholder="Filtre par les valeurs"
-  value={(table.getColumn("Ptot")?.getFilterValue() as string) ?? ""}
-  onChange={(event) => {
-    const value = event.target.value;
-    table.getColumn("Ptot")?.setFilterValue(value);
-    const regex = new RegExp(value, "i");
-    const filteredData = data.filter((item) =>
-      regex.test(item.Ptot.toString())
-    );
-    setData(filteredData);
-  }}
-  onInput={(event) => {
-    const value = event.target.value;
-    if (value === "") {
-      setData(data); // Réinitialiser les données
-    }
-  }}
-  className="max-w-sm"
-/>
+        {/* Input de filtre */}
+        <Input
+          placeholder="Filtre par les valeurs"
+          value={(table.getColumn("Ptot")?.getFilterValue() as string) ?? ""}
+          onChange={(event) => {
+            const value = event.target.value;
+            table.getColumn("Ptot")?.setFilterValue(value);
+            const regex = new RegExp(value, "i");
+            const filteredData = initialData.filter((item) =>
+              regex.test(item.Ptot.toString())
+            );
+            setData(filteredData);
+          }}
+          onInput={(event) => {
+            const value = event.target.value;
+            if (value === "") {
+              resetData(); // Réinitialiser les données
+            }
+          }}
+          className="max-w-sm"
+        />
 
-
-
+        {/* Dropdown pour sélectionner les colonnes */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -153,6 +150,8 @@ export function DataTableplateau2() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      {/* Tableau des données */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -203,6 +202,8 @@ export function DataTableplateau2() {
           </TableBody>
         </Table>
       </div>
+
+      {/* Pagination */}
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
         </div>

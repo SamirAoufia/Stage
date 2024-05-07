@@ -63,37 +63,37 @@ export function DataTablecuisson() {
     },
     {
       accessorKey: "Humidity",
-      header: "Valeur",
+      header: "Humidity",
       cell: ({ row }) => <div>{row.getValue("Humidity")}</div>,
     },
     {
       accessorKey: "Ds18b20Temp",
-      header: "Valeur",
+      header: "Ds18b20Temp",
       cell: ({ row }) => <div>{row.getValue("Ds18b20Temp")}</div>,
     },
     {
       accessorKey: "MlxTemp",
-      header: "Valeur",
+      header: "MlxTemp",
       cell: ({ row }) => <div>{row.getValue("MlxTemp")}</div>,
     },
     {
       accessorKey: "Power",
-      header: "Valeur",
+      header: "Power",
       cell: ({ row }) => <div>{row.getValue("Power")}</div>,
     },
     {
       accessorKey: "Temperature",
-      header: "Valeur",
+      header: "Temperature",
       cell: ({ row }) => <div>{row.getValue("Temperature")}</div>,
     },
     {
       accessorKey: "ThermocoupleTemp",
-      header: "Valeur",
+      header: "ThermocoupleTemp",
       cell: ({ row }) => <div>{row.getValue("ThermocoupleTemp")}</div>,
     },
     {
       accessorKey: "ThermocoupleTestoTemp",
-      header: "Valeur",
+      header: "ThermocoupleTestoTemp",
       cell: ({ row }) => <div>{row.getValue("ThermocoupleTestoTemp")}</div>,
     },
     
