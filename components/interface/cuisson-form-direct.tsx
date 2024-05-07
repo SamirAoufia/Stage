@@ -33,10 +33,45 @@ const CuissonForm = () => {
   // Fonction pour récupérer les données de l'API
   async function fetchDataFromAPI() {
     try {
-      const response = await fetch('../api/plaquedecuisson');
+      const response = await fetch('../api/plaquedecuissondirect');
       const responseData = await response.json();
       setData(responseData);
       
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  async function fiveminute() {
+    try {
+      const response = await fetch(`../api/plaquedecuissondirect`,{
+        method: 'POST',
+        body: JSON.stringify({time: '-5m'}),
+      
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  async function fifteenminute() {
+    try {
+      const response = await fetch(`../api/plaquedecuissondirect`,{
+        method: 'POST',
+        body: JSON.stringify({time: '-15m'}),
+      
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+  async function OneHour() {
+    try {
+      const response = await fetch(`../api/plaquedecuissondirect`,{
+        method: 'POST',
+        body: JSON.stringify({time: '-1h'}),
+      
+      });
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -82,7 +117,17 @@ const CuissonForm = () => {
     <main>
       
       <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE CUISSON</h1>
-      <div className='flex items-center justify-center'> <DateRangePicker locale='fr'/></div>
+      <div className='flex justify-center mt-6  gap-x-5'>
+          <Button onClick={fiveminute} className=" hover:bg-[#AB9D62]">
+            5 dernières minutes
+          </Button>
+          <Button onClick={fifteenminute} className=" hover:bg-[#AB9D62]">
+            15 dernières minutes
+          </Button>
+          <Button onClick={OneHour} className=" hover:bg-[#AB9D62]">
+            1 heure
+          </Button>
+        </div>
       <div className='flex justify-center gap-x-5'>
           <Button
             onClick={handleClickHumidity}

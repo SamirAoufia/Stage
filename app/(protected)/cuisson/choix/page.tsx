@@ -1,5 +1,5 @@
 
-import CuissonForm from "@/components/interface/cuisson-form";
+import CuissonForm from "@/components/interface/cuisson-form-choix";
 
 
 const CuissonPage = () => {

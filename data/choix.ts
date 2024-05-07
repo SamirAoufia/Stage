@@ -18,3 +18,12 @@ export const getChoiceP2 = async () => {
     return null
   }
 }
+
+export const getCuisson = async () => {
+  try {
+    const plat = await db.cuisson.findMany()
+    return plat
+  } catch (error) {
+    return null
+  }
+}

@@ -1,4 +1,4 @@
-import BluetoothForm from "@/components/interface/bluetooth-form";
+import BluetoothForm from "@/components/interface/bluetooth-form-choix";
 
 
 
