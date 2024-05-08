@@ -87,9 +87,6 @@ export const Navbar = () => {
               <ListItem href="/plateau/choix" title="Choix">
                 Choix de la date et/ou de la personne.
               </ListItem>
-              <ListItem href="/plateau/plateau" title="Ajout plateau">
-                Code a ajouter pour un nouveau plateau.
-              </ListItem>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
