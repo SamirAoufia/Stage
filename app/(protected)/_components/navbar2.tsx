@@ -1,5 +1,4 @@
-'use client'
-
+"use client"
 import { UserButton } from "@/components/auth/userAvatar";
 import Image from "next/image";
 import * as React from "react"
@@ -14,25 +13,45 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-
+import { useState } from 'react';
+import { HamburgerMenuIcon, Cross1Icon} from "@radix-ui/react-icons"
 
 export const Navbar = () => {
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
-  <main className=" flex justify-between items-center p-4 rounded-xl shadow-sm">
-    <div className="flex items-start">
-          <Image src="/LSGlogo.svg" alt="logo" width={150} height={150} />
-    </div>
+<nav className="flex flex-col md:flex-row justify-between items-center p-4 rounded-xl shadow-sm">
+      <div className="hidden md:flex items-start">
+        <Image src="/LSGlogo.svg" alt="logo" width={150} height={150} />
+      </div>
 
+      {/* Bouton de menu pour la version mobile */}
+      <div className="md:hidden">
+      <button onClick={toggleMenu}>
+          {menuOpen ? <Cross1Icon  /> : <HamburgerMenuIcon />}
+        </button>
+      </div>
 
+      <div className={`md:flex md:items-center ${menuOpen ? '' : 'hidden'}`}>
 
-    <NavigationMenu>
-      <NavigationMenuList>
-      <NavigationMenuItem  >
+      <NavigationMenu>
+      <NavigationMenuList   className="grid grid-cols-3 md:grid-cols-none md:flex">
+      <NavigationMenuItem   className="" >
           <Link href="/information" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()} >
               Information
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem >
+          <Link href="/documentation" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Documentation
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
@@ -57,7 +76,7 @@ export const Navbar = () => {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Plateau</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid gap-3 p-4 md:w-[200px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               
               <ListItem href="/plateau" title="Direct">
                 Graphique des plateaux en direct.
@@ -88,24 +107,14 @@ export const Navbar = () => {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem >
-          <Link href="/documentation" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Documentation
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+        
       </NavigationMenuList>
     </NavigationMenu>
-
-
-
-<div className="items-end">
-  <UserButton />
-</div>
-</main>
-
-
+    </div>
+      <div className="items-end">
+        <UserButton />
+      </div>
+    </nav>
   );
 };
 
@@ -134,8 +143,3 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-
-
-
-
-

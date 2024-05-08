@@ -33,7 +33,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-export function DataTableplateau1() {
+export function DataTableplateau2() {
   const [data, setData] = useState([]);
   const [initialData, setInitialData] = useState([]); // Ajout de l'état pour stocker les données initiales
 

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { LogoutButton } from "./logout-button";
+import { LogoutButton } from "@/components/auth/logout-button";
 
 export const  UserButton = () => {
   const { data: session } = useSession();

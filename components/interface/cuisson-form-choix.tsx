@@ -184,7 +184,7 @@ const CuissonForm = () => {
   return (
     <main>
       
-      <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE CUISSON</h1>
+      <h1 className='text-center my-3 text-3xl md:text-4xl lg:text-5xl text-[#AB9D62] underline' >GRAPHIQUE CUISSON</h1>
        
         <div className="flex justify-center mt-6">  
         <Select onValueChange={handlePlatSelect}>
@@ -234,7 +234,7 @@ const CuissonForm = () => {
         
         
         
-        <div className='flex justify-center gap-x-5'>
+        <div className='flex flex-wrap justify-center gap-x-5 gap-y-3 md:flex md:gap-x-5 md:gap-y-5'>
           <Button
             onClick={handleClickHumidity}
             className='mt-5 hover:bg-[#AB9D62]'

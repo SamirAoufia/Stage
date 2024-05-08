@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Button } from '@/components/ui/button';
-import { DateRangePicker } from '@/components/calendrier/data-picker-cuisson';
+import { Separator } from "@/components/ui/separator"
 
 const CuissonForm = () => {
   const [data, setData] = useState([]);
@@ -127,8 +127,8 @@ const CuissonForm = () => {
   return (
     <main>
       
-      <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE CUISSON</h1>
-      <div className='flex justify-center mt-6  gap-x-5'>
+      <h1 className='text-center my-3 text-3xl md:text-4xl lg:text-5xl text-[#AB9D62] underline' >GRAPHIQUE EN DIRECT DE LA CUISSON</h1>
+      <div className='flex flex-wrap justify-center mt-6 gap-x-3 md:flex md:gap-y-5 md:gap-x-5'>
           <Button onClick={fiveminute} className=" hover:bg-[#AB9D62]">
             5 dernières minutes
           </Button>
@@ -139,51 +139,52 @@ const CuissonForm = () => {
             1 heure
           </Button>
         </div>
-      <div className='flex justify-center gap-x-5'>
+        <Separator className="my-4" />
+      <div className='flex flex-wrap justify-center gap-x-5 gap-y-3 md:flex md:gap-x-5 md:gap-y-5'>
           <Button
             onClick={handleClickHumidity}
-            className='mt-5 hover:bg-[#AB9D62]'
+            className='mt-3 hover:bg-[#AB9D62]'
             variant={humidity === 0 ? "default" : 'outline' }
           >Humidity = {hum}
           </Button>
         
           <Button 
           onClick={handleClickTemperature} 
-          className='mt-5 hover:bg-[#AB9D62]' 
+          className='mt-3 hover:bg-[#AB9D62]' 
           variant={temperature === 0 ? "default" : 'outline' }>
           Temperature = {temp}
           </Button>
 
           <Button
             onClick={handleClickThermocoupleTestoTemp}
-            className='mt-5 hover:bg-[#AB9D62]'
+            className='mt-3 hover:bg-[#AB9D62]'
             variant={thermocoupleTestoTemp === 0 ? "default" : 'outline' }
           >ThermoTestoTemp = {tctt}
           </Button>
 
           <Button
             onClick={handleClickPower}
-            className='mt-5 hover:bg-[#AB9D62]'
+            className='mt-3 hover:bg-[#AB9D62]'
             variant={power === 0 ? "default" : 'outline' }
           > Power = {p}
           </Button>
 
           <Button
             onClick={handleClickMlxTemp}
-            className='mt-5 hover:bg-[#AB9D62] '
+            className='mt-3 hover:bg-[#AB9D62] '
             variant={mlxTemp === 0 ? "default" : 'outline' }
           >MlxTemp = {mlx}
           </Button>
           <Button
             onClick={handleClickThermocoupleTemp}
-            className='mt-5 hover:bg-[#AB9D62]'
+            className='mt-3 hover:bg-[#AB9D62]'
             variant={thermocoupleTemp === 0 ? "default" : 'outline' }
           > ThermocoupleTemp = {tct}
           </Button>
 
           <Button
             onClick={handleClickDs18b20Temp}
-            className='mt-5 hover:bg-[#AB9D62]'
+            className='mt-3 hover:bg-[#AB9D62]'
             variant={ds18b20Temp === 0 ? "default" : 'outline' }
           >Ds18b20Temp = {ds}
           </Button>

@@ -81,13 +81,13 @@ const AllUsers = () => {
   }
 
   return (
-    <main > 
-    <div className="flex gap-x5"> 
-      <ul>
+    <main className="px-4 md:px-8 lg:px-16" > 
+    <div className="flex flex-col md:flex-row gap-x-5 justify-center"> 
+      <ul className="w-full md:w-auto">
         {users?.map(user => (
-          <div  key={user.id} className="border border-gray-300 rounded-md p-4 mb-4">
+          <div  key={user.id} className="flex border border-gray-300 rounded-md p-4 mb-4">
 
-          <Table>
+          <Table >
             <TableHeader>
               <TableRow>
               <TableHead>ID</TableHead>

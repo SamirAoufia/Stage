@@ -83,7 +83,7 @@ const PlateauForm = () => {
   return (
 
       <main>
-        <h1 className='flex items-center justify-center  my-3  text-5xl  text-[#AB9D62]  underline' >GRAPHIQUE PLATEAU</h1>
+        <h1 className='text-center my-3 text-3xl md:text-4xl lg:text-5xl text-[#AB9D62] underline' >GRAPHIQUE EN DIRECT DES PLATEAUX</h1>
 
 
 
@@ -99,7 +99,7 @@ const PlateauForm = () => {
           </Select>
           </div>
 
-          <div className='flex justify-center mt-6  gap-x-5'>
+          <div className='flex flex-wrap justify-center mt-6 gap-x-5 gap-y-3 md:flex md:gap-x-5 md:gap-y-5 '>
             
             {selectedPlateau === 'plateau1direct' && (
               <>

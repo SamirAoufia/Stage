@@ -8,7 +8,7 @@ const UsersPage = () => {
  
 
   return (
-    <div className="flex justify-center">
+    <div >
     <RoleGate allowedRole="Admin">
     <AllUsers />
   </RoleGate>
