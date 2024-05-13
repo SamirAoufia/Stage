@@ -133,33 +133,11 @@ export function DataTablecuisson() {
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-      <Input
-  placeholder="Filtre par les valeurs"
-  value={(table.getColumn("ThermocoupleTestoTemp")?.getFilterValue() as string) ?? ""}
-  onChange={(event) => {
-    const value = event.target.value;
-    table.getColumn("ThermocoupleTestoTemp")?.setFilterValue(value);
-    const regex = new RegExp(value, "i");
-    const filteredData = data.filter((item) =>
-      regex.test(item.ThermocoupleTestoTemp.toString())
-    );
-    setData(filteredData);
-  }}
-  onInput={(event) => {
-    const value = event.target.value;
-    if (value === "") {
-      setData(data); // Réinitialiser les données
-    }
-  }}
-  className="max-w-sm"
-/>
-
-
-
+      
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+              Colonne <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
