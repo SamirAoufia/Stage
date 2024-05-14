@@ -5,6 +5,8 @@ import { db  }   from "@/lib/db"
 import { Role } from "@prisma/client";
 import { getUserById, getUserByUsername } from "@/data/user";
 
+
+
 export const {
   handlers: { GET, POST },
   auth,
@@ -29,8 +31,12 @@ export const {
 
     },
 
-    async jwt({token}){
+    async jwt({token, account}){
       if (!token.name) return token;
+
+      if(account){
+        
+      }
 
       const user = await getUserByUsername(token.name)
 

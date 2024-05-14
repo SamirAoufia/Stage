@@ -8,9 +8,7 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 
 export const Social = () => {
 
-  const handleMicrosoft = async () => {
-    await signIn("azure-ad", { callbackUrl: DEFAULT_LOGIN_REDIRECT })
-  }
+
 
 
 
@@ -20,7 +18,13 @@ export const Social = () => {
       variant="outline"
       size="lg"
       className="w-full"
-      onClick={handleMicrosoft}
+      onClick={async () => {
+        signIn('azure-ad', {
+          callbackUrl: DEFAULT_LOGIN_REDIRECT
+        })
+      
+      
+      }}
       >
         <FaMicrosoft className="h-5 w-5"/>
       </Button>
