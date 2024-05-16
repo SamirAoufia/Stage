@@ -13,6 +13,18 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  events: {
+    async linkAccount({user}){
+      await db.user.update({
+        where: {
+          id: user.id
+        },
+        data: {
+          email: user.email
+        }
+      })
+    }
+  },
   callbacks: {
 
     async session({token, session} ) {
@@ -31,12 +43,9 @@ export const {
 
     },
 
-    async jwt({token, account}){
+    async jwt({token}){
       if (!token.name) return token;
 
-      if(account){
-        
-      }
 
       const user = await getUserByUsername(token.name)
 
